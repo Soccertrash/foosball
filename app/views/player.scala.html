@@ -9,18 +9,36 @@
 				@textInput.apply("lastName","lastName","*")
 				@textInput.apply("firstName","firstName","*")
 				@textInput.apply("nickname","nickname")
+				<div class="control-group success hide">
+					<div class="controls">
+						<span class="help-inline" data-success>This is a TEst</span>
+					</div>
+				</div>
 				<div class="control-group">
 					<div class="controls">
-						<button type="submit" class="btn btn-primary center">@Messages("button.ok")</button>
+						<button type="submit" class="btn btn-primary center" data-loading-text="Loading...">@Messages("button.ok")</button>
 						<button type="reset" class="btn">@Messages("button.cancel")</button>
 					</div>
-					
+				</div>
 			</fieldset>
 		</form>
 
-		<div id="result"></div>
-	</div>
-	<!-- span1 -->
-</div>
-<!-- row -->
+		
+	</div>	<!-- offset3 span6 -->
+</div><!-- row -->
+
+<div class="row">
+	<div class="offset2 span8">
+		<div class="pagination pagination-centered">
+		    <ul>
+		    <li><a href="#">Prev</a></li>
+		    <li class="active"><a href="#">1</a></li>
+		    <li><a href="#">2</a></li>
+		    <li><a href="#">3</a></li>
+		    <li><a href="#">4</a></li>
+		    <li><a href="#">Next</a></li>
+		    </ul>
+    	</div><!-- Pagination -->
+	</div><!-- offset2 span8 -->
+</div><!-- row -->
 }

@@ -8,6 +8,8 @@ GET     /                           controllers.Landing.land
 # Player page
 GET		/player						controllers.PlayerController.index
 POST	/player/new					controllers.PlayerController.add
+GET		/player/list                controllers.PlayerController.list(first: Integer ?= 0, max: Integer ?=10)
+GET		/player/amount              controllers.PlayerController.count
 
 # Javascript routing
 GET    /assets/javascripts/routes      controllers.JavascriptRouter.javascriptRoutes()

@@ -9,6 +9,7 @@ button.cancel=Abbruch
 lastName=Nachname
 firstName=Vorname
 nickname=Nickname
+player.successful=Der Spieler wurde erfolgreich angelegt
 
 ### Contraints
 constraint.required=*
