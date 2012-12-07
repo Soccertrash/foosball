@@ -1,1 +1,4 @@
 application.title=Table foosball tournament manager
+lastName=Surname
+firstName=Given name
+error.required=%s is required

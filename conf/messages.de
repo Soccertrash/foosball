@@ -1,1 +1,31 @@
 application.title=Tischfußball Turnierverwaltung
+
+### Forms
+# Common
+button.ok=OK
+button.cancel=Abbruch
+
+# Player
+lastName=Nachname
+firstName=Vorname
+nickname=Nickname
+
+### Contraints
+constraint.required=*
+constraint.min=Minimum {0}
+constraint.max=Maximum {0}
+constraint.minLength=Min. Länge: {0}
+constraint.maxLength=Max. Länge: {0}
+constraint.email=""
+
+
+### Errors
+error.invalid=Ungültiger Wert
+error.required=Pflichtfeld
+error.number=Bitte eine Zahl eingeben
+error.min=Muss mindestens {0} sein
+error.max=Darf höchstens {0} sein
+error.minLength=Min. Länge ist {0}
+error.maxLength=Max. Länge ist {0}
+error.email=Keine gültige Emailadresse
+error.pattern=Muss dem Muster {0} entsprechen
