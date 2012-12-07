@@ -1,0 +1,13 @@
+@(fieldName: String, messageId: String, helpText: String ="")
+
+@import play.api.i18n.Messages
+
+
+<div class="control-group">
+	<label class="control-label" for="@fieldName">@Messages(messageId)</label>
+	<div class="controls">
+		<input type="text" id="@fieldName" name="@fieldName" placeholder="@Messages(messageId)"/>
+		<span class="help-inline" data-error></span>
+		<span class="help-inline">@helpText</span>
+	</div>
+</div>

@@ -1,0 +1,26 @@
+@import views.html.components._ 
+
+@template{
+
+<div class="row">
+	<div class="offset3 span6">
+		<form class="form-horizontal">
+			<fieldset>
+				@textInput.apply("lastName","lastName","*")
+				@textInput.apply("firstName","firstName","*")
+				@textInput.apply("nickname","nickname")
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-primary center">@Messages("button.ok")</button>
+						<button type="reset" class="btn">@Messages("button.cancel")</button>
+					</div>
+					
+			</fieldset>
+		</form>
+
+		<div id="result"></div>
+	</div>
+	<!-- span1 -->
+</div>
+<!-- row -->
+}
