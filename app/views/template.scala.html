@@ -1,0 +1,28 @@
+@(pageContent: Html)
+
+@import play.api.i18n.Messages 
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+       <title>@Messages("application.title")</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+       <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/bootstrap.css")"/>
+       <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap/responsive.css")"/>
+       <style type="text/css">
+       .center {
+		    float: none;
+		    margin: 0 auto;
+		    text-align: center;
+		}
+       </style>
+    </head>
+    <body>
+     	@pageContent
+       
+       <script src="@routes.Assets.at("ja1vascripts/jquery-1.8.3.min.js")" type="text/javascript"></script>
+       <script src="@routes.Assets.at("ja1vascripts/bootstrap.min.js")" type="text/javascript"></script>
+       
+    </body>
+</html>
