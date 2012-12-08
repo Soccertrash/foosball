@@ -16,6 +16,7 @@ import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+import controllers.pagination.PaginationConfiguration;
 
 /**
  * The Class PlayerController is used to CRUD the Player objects .
@@ -24,6 +25,8 @@ public class PlayerController extends Controller {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(PlayerController.class);
+
+	private final static int PAGE_SIZE = 10;
 
 	public static Result index() {
 		return ok(views.html.player.render());
@@ -48,16 +51,23 @@ public class PlayerController extends Controller {
 	}
 
 	@Transactional
-	public static Result list(Integer first, Integer max) {
-		LOGGER.trace("start list with first={} and max={}");
+	public static Result list(Integer page) {
+		LOGGER.trace("start list with page {}", page);
+		int first = (page - 1) * PAGE_SIZE;
+		int max = first + PAGE_SIZE;
 		List<Player> findList = Player.finder.setFirstRow(first)
 				.setMaxRows(max).findList();
 		LOGGER.trace("Found {}", findList);
 		return ok(Json.toJson(findList));
 	}
 
-	@Transactional
-	public static Result count() {
-		return ok(String.valueOf(Player.finder.findRowCount()));
+	public static Result paginatorConfiguration() {
+		PaginationConfiguration configuration = new PaginationConfiguration.Builder()
+				.pageSize(PAGE_SIZE)
+				.addColumn("lastName", Messages.get("lastName"), true)
+				.addColumn("firstName", Messages.get("firstName"), true)
+				.addColumn("nickname", Messages.get("nickname"), true)
+				.rowAmount(Player.finder.findRowCount()).build();
+		return ok(Json.toJson(configuration));
 	}
 }

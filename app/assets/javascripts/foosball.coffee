@@ -84,7 +84,7 @@ $.fn.displayFormSuccess = (message) ->
 
 ###
 OnLoad
-###  
+### 
 $ -> # document ready
     $('form').submit( ->
         $('form').sendBackend(jsRoutes.controllers.PlayerController.add())

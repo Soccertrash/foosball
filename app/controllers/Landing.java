@@ -15,7 +15,7 @@ public class Landing extends Controller {
 	 * 
 	 * @return landing page result
 	 */
-	public static Result land() {
+	public static Result start() {
 		return ok(views.html.landing.render());
 	}
 
