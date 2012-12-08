@@ -1,6 +1,8 @@
 package controllers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import model.Player;
 
@@ -16,6 +18,10 @@ import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+import scala.actors.threadpool.Arrays;
+
+import com.avaje.ebean.Query;
+
 import controllers.pagination.PaginationConfiguration;
 
 /**
@@ -52,11 +58,42 @@ public class PlayerController extends Controller {
 
 	@Transactional
 	public static Result list(Integer page) {
+		Map<String, String[]> queryString = request().queryString();
+		String orderByCol = null;
+		Boolean isAsc = true;
+		for (Entry<String, String[]> entry : queryString.entrySet()) {
+			String key = entry.getKey();
+			LOGGER.trace("Key {} Value {}", key,
+					Arrays.toString(entry.getValue()));
+			switch (key) {
+			case "lastName":
+			case "firstName":
+			case "nickName":
+				orderByCol = key;
+				break;
+			}
+			if (orderByCol != null) {
+				if (entry.getValue() != null && entry.getValue().length > 0) {
+					isAsc = Boolean.valueOf(entry.getValue()[0]);
+					break;
+				}
+			}
+
+		}
 		LOGGER.trace("start list with page {}", page);
 		int first = (page - 1) * PAGE_SIZE;
 		int max = first + PAGE_SIZE;
-		List<Player> findList = Player.finder.setFirstRow(first)
-				.setMaxRows(max).findList();
+		Query<Player> query = Player.finder.setFirstRow(first).setMaxRows(max);
+		if (orderByCol != null) {
+			LOGGER.trace("Order by {} {}", orderByCol, isAsc);
+			if (isAsc) {
+				query.orderBy().asc(orderByCol);
+			} else {
+				query.orderBy().desc(orderByCol);
+			}
+		}
+
+		List<Player> findList = query.findList();
 		LOGGER.trace("Found {}", findList);
 		return ok(Json.toJson(findList));
 	}
