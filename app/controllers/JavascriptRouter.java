@@ -14,11 +14,11 @@ public class JavascriptRouter extends Controller {
 		return ok(Routes.javascriptRouter(
 				"jsRoutes",
 				// Routes
-				controllers.routes.javascript.PlayerController.add(),
-				controllers.routes.javascript.PlayerController
+				controllers.player.routes.javascript.PlayerController.add(),
+				controllers.player.routes.javascript.PlayerController
 						.paginatorConfiguration(),
-				controllers.routes.javascript.PlayerController
+				controllers.player.routes.javascript.PlayerController
 						.listenForUpdates(),
-				controllers.routes.javascript.PlayerController.list()));
+				controllers.player.routes.javascript.PlayerController.list()));
 	}
 }

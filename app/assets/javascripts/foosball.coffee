@@ -87,7 +87,7 @@ OnLoad
 ### 
 $ -> # document ready
     $('form').submit( ->
-        $('form').sendBackend(jsRoutes.controllers.PlayerController.add())
+        $('form').sendBackend(jsRoutes.controllers.player.PlayerController.add())
         return false
         )
     $('button[class="btn"]').click( ->
