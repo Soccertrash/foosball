@@ -11,6 +11,10 @@ import play.mvc.WebSocket.Out;
 import akka.actor.UntypedActor;
 import controllers.PlayerDataUpdater.WebSocketContainer;
 
+/**
+ * The Class PlayerDataUpdater notifies all known webSockets about a
+ * insertion/deletion/editing of a player
+ */
 public class PlayerDataUpdater extends UntypedActor {
 
 	private Map<WebSocket.In<String>, WebSocket.Out<String>> webSockets = new HashMap<>();
@@ -39,6 +43,9 @@ public class PlayerDataUpdater extends UntypedActor {
 		}
 	}
 
+	/**
+	 * The Class WebSocketContainer holds the In and Out of a WebSocket
+	 */
 	public static class WebSocketContainer {
 
 		private final WebSocket.Out<String> out;

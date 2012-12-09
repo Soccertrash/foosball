@@ -37,6 +37,7 @@ public class PlayerController extends Controller {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(PlayerController.class);
 
+	/** The player updater is used to send messages to the GUI */
 	static ActorRef playerUpdater = Akka.system().actorOf(
 			new Props(PlayerDataUpdater.class));
 
