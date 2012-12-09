@@ -1,5 +1,9 @@
 application.title=Tischfußball Turnierverwaltung
 
+### Navbar
+# Player
+navbar.player=Spieler
+
 ### Forms
 # Common
 button.ok=OK
