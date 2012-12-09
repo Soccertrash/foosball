@@ -10,6 +10,7 @@ GET		/player						controllers.PlayerController.index
 POST	/player/new					controllers.PlayerController.add
 GET		/player/list/:page          controllers.PlayerController.list(page: Integer)
 GET		/player/paginatorConfig		controllers.PlayerController.paginatorConfiguration
+GET		/player/update				controllers.PlayerController.listenForUpdates
 
 # Javascript routing
 GET    /assets/javascripts/routes      controllers.JavascriptRouter.javascriptRoutes()

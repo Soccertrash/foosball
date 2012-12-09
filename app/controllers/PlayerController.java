@@ -14,14 +14,19 @@ import org.slf4j.LoggerFactory;
 import play.data.Form;
 import play.db.ebean.Transactional;
 import play.i18n.Messages;
+import play.libs.Akka;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.WebSocket;
 import scala.actors.threadpool.Arrays;
+import akka.actor.ActorRef;
+import akka.actor.Props;
 
 import com.avaje.ebean.Query;
 
+import controllers.PlayerDataUpdater.WebSocketContainer;
 import controllers.pagination.PaginationConfiguration;
 
 /**
@@ -31,6 +36,9 @@ public class PlayerController extends Controller {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(PlayerController.class);
+
+	static ActorRef playerUpdater = Akka.system().actorOf(
+			new Props(PlayerDataUpdater.class));
 
 	private final static int PAGE_SIZE = 10;
 
@@ -50,9 +58,11 @@ public class PlayerController extends Controller {
 			LOGGER.warn("Errors are (JSON) {}", errorsAsJson);
 			return badRequest(errorsAsJson);
 		}
-		boundForm.get().save();
+		Player player = boundForm.get();
+		player.save();
 		ObjectNode result = play.libs.Json.newObject();
 		result.put("result", Messages.get("player.successful"));
+		playerUpdater.tell(player);
 		return ok(result);
 	}
 
@@ -106,5 +116,18 @@ public class PlayerController extends Controller {
 				.addColumn("nickname", Messages.get("nickname"), true)
 				.rowAmount(Player.finder.findRowCount()).build();
 		return ok(Json.toJson(configuration));
+	}
+
+	public static WebSocket<String> listenForUpdates() {
+		LOGGER.trace("Entered listenForUpdates");
+		WebSocket<String> result = new WebSocket<String>() {
+
+			@Override
+			public void onReady(play.mvc.WebSocket.In<String> in,
+					play.mvc.WebSocket.Out<String> out) {
+				playerUpdater.tell(new WebSocketContainer(out, in));
+			}
+		};
+		return result;
 	}
 }

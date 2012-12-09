@@ -70,7 +70,7 @@ class Paginator
                        sortingIsAsc = true
                     this.loadPage(currentPage)
                     $("thead tr th[data-propertyName] i",table).remove()
-                    arrowDirection = if sortingIsAsc then "up" else "down"
+                    arrowDirection = if sortingIsAsc then "down" else "up"
                     $("thead tr th[data-propertyName=\"#{sortingPropertyName}\"]",table).append("<i class=\"icon-arrow-#{arrowDirection}\"></i>")
                     return false
                 )
@@ -115,6 +115,12 @@ class Paginator
          )
          currentPage = page
          this.checkStatusOfPrevAndNext()
+         
+      ###
+      Update current page
+      ###
+      reloadPage: () =>
+          this.loadPage(currentPage)
       
       ###
       Fill the actual table rows with the data received from Backend
@@ -130,11 +136,22 @@ class Paginator
 
            handleRow row for row in jsonData
           
-                
+
 ###
 OnLoad
 ###  
 $ -> # document ready
     paginator = new Paginator(jsRoutes.controllers.PlayerController.paginatorConfiguration(), jsRoutes.controllers.PlayerController)
-    paginator.setup()      
+    paginator.setup() 
+    
+    WS = if window['MozWebSocket'] then MozWebSocket else WebSocket
+    
+    baseURL = jsRoutes.controllers.PlayerController.listenForUpdates().webSocketURL()
+    sock = new WS(baseURL)
+            
+    sock.onmessage = (event) ->
+       paginator.reloadPage()
+            
+    
+    
  

@@ -17,6 +17,8 @@ public class JavascriptRouter extends Controller {
 				controllers.routes.javascript.PlayerController.add(),
 				controllers.routes.javascript.PlayerController
 						.paginatorConfiguration(),
+				controllers.routes.javascript.PlayerController
+						.listenForUpdates(),
 				controllers.routes.javascript.PlayerController.list()));
 	}
 }
