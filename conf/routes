@@ -11,7 +11,7 @@ POST	/player/new					controllers.player.PlayerController.add
 GET		/player/list/:page          controllers.player.PlayerController.list(page: Integer)
 GET		/player/paginatorConfig		controllers.player.PlayerController.paginatorConfiguration
 GET		/player/update				controllers.player.PlayerController.listenForUpdates
-GET		/player/remove/:id			controllers.player.PlayerController.remove(id: Integer)
+GET		/player/remove/:id			controllers.player.PlayerController.remove(id: Long)
 
 # Javascript routing
 GET    /assets/javascripts/routes      controllers.JavascriptRouter.javascriptRoutes()
