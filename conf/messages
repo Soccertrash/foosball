@@ -1,4 +1,36 @@
 application.title=Table foosball tournament manager
+
+### Navbar
+# Player
+navbar.player=Player
+
+### Forms
+# Common
+button.ok=OK
+button.cancel=Cancel
+
+# Player
 lastName=Surname
 firstName=Given name
-error.required=%s is required
+nickname=Nickname
+player.successful=Player was successfully inserted
+
+### Contraints
+constraint.required=*
+constraint.min=Minimum {0}
+constraint.max=Maximum {0}
+constraint.minLength=Min. length: {0}
+constraint.maxLength=Max. length: {0}
+constraint.email=""
+
+
+### Errors
+error.invalid=Invalid value
+error.required=Required field
+error.number=Please enter a number
+error.min=Has to be at least {0}
+error.max=Has not to be more than {0}
+error.minLength=Min. length is {0}
+error.maxLength=Max. length is {0}
+error.email=Email is not valid
+error.pattern=Has to match the pattern {0}

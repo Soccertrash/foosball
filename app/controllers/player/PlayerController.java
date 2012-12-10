@@ -67,6 +67,15 @@ public class PlayerController extends Controller {
 		return ok(result);
 	}
 
+	public static Result remove(Long id) {
+		Player player = Player.finder.byId(id);
+		if (player != null) {
+			player.delete();
+			playerUpdater.tell(player);
+		}
+		return ok();
+	}
+
 	@Transactional
 	public static Result list(Integer page) {
 		Map<String, String[]> queryString = request().queryString();
