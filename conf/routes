@@ -13,6 +13,10 @@ GET		/player/paginatorConfig		controllers.player.PlayerController.paginatorConfi
 GET		/player/update				controllers.player.PlayerController.listenForUpdates
 GET		/player/remove/:id			controllers.player.PlayerController.remove(id: Long)
 
+# Game services
+GET		/game/list					controllers.game.GameController.list()
+GET		/game/amount				controllers.game.GameController.amount()
+
 # Javascript routing
 GET    /assets/javascripts/routes      controllers.JavascriptRouter.javascriptRoutes()
 
