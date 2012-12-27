@@ -14,11 +14,6 @@ public class JavascriptRouter extends Controller {
 		return ok(Routes.javascriptRouter(
 				"jsRoutes",
 				// Routes
-				controllers.player.routes.javascript.PlayerController.add(),
-				controllers.player.routes.javascript.PlayerController
-						.paginatorConfiguration(),
-				controllers.player.routes.javascript.PlayerController
-						.listenForUpdates(),
-				controllers.player.routes.javascript.PlayerController.list()));
+				controllers.player.routes.javascript.PlayerController.websocket()			));
 	}
 }

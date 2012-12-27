@@ -7,7 +7,7 @@ create table player (
   id                        bigint not null,
   first_name                varchar(255),
   last_name                 varchar(255),
-  nickname                  varchar(255),
+  acronym                   varchar(255),
   constraint pk_player primary key (id))
 ;
 

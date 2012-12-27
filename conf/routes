@@ -3,14 +3,18 @@
 # ~~~~
 
 # landing page
-GET     /                           controllers.Landing.start
+GET     /                           controllers.Application.index
 
-# Player page
-GET		/player						controllers.player.PlayerController.index
-POST	/player/new					controllers.player.PlayerController.add
-GET		/player/list/:page          controllers.player.PlayerController.list(page: Integer)
-GET		/player/paginatorConfig		controllers.player.PlayerController.paginatorConfiguration
-GET		/player/update				controllers.player.PlayerController.listenForUpdates
+# Navbar
+GET		/navbar.html				controllers.Application.navbar
+
+# Partials
+GET     /partials/player.html		controllers.Application.player
+GET     /partials/home.html		controllers.Application.home
+
+
+# Player
+GET		/Player/websocket			controllers.player.PlayerController.websocket
 
 # Javascript routing
 GET    /assets/javascripts/routes      controllers.JavascriptRouter.javascriptRoutes()

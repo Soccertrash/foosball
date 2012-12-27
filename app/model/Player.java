@@ -31,7 +31,8 @@ public class Player extends Model {
 	private String lastName;
 
 	/** The nickname. */
-	private String nickname;
+	@Required
+	private String acronym;
 
 	/**
 	 * Gets the id.
@@ -95,8 +96,8 @@ public class Player extends Model {
 	 * 
 	 * @return the nickname
 	 */
-	public String getNickname() {
-		return nickname;
+	public String getAcronym() {
+		return acronym;
 	}
 
 	/**
@@ -105,8 +106,8 @@ public class Player extends Model {
 	 * @param nickname
 	 *            the nickname to set
 	 */
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setAcronym(String acronym) {
+		this.acronym = acronym;
 	}
 
 	/** The finder is used to get instances of Player */
