@@ -11,6 +11,7 @@ GET		/navbar.html				controllers.Application.navbar
 # Partials
 GET     /partials/player.html		controllers.Application.player
 GET     /partials/home.html		controllers.Application.home
+GET     /partials/tournametCreation.html		controllers.Application.tournametCreation
 
 
 # Player

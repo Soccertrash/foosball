@@ -4,6 +4,7 @@ application.title=Tischfußball Turnierverwaltung
 # Player
 nav.home=Home
 nav.player=Spieler
+nav.tournamet.creation=Turnier anlegen
 
 ### Forms
 # Common

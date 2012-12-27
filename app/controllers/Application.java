@@ -19,4 +19,7 @@ public class Application extends Controller {
 	public static Result home(){
 		return ok(views.html.partials.home.render());
 	}
+	public static Result tournametCreation(){
+		return ok(views.html.partials.tournametCreation.render());
+	}
 }
