@@ -16,6 +16,7 @@ GET     /partials/home.html		controllers.Application.home
 # Player
 GET		/Player/websocket			controllers.player.PlayerController.websocket
 
+
 # Javascript routing
 GET    /assets/javascripts/routes      controllers.JavascriptRouter.javascriptRoutes()
 

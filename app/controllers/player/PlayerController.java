@@ -23,6 +23,7 @@ public class PlayerController extends Controller {
 	private static ActorRef SOCKET_HANDLER = Akka.system().actorOf(
 			new Props(PlayerActor.class));
 
+
 	public static WebSocket<String> websocket() {
 		final Context context = Http.Context.current();
 		WebSocket<String> result = new WebSocket<String>() {
