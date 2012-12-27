@@ -30,7 +30,7 @@
                         errormessage="@Messages("constraint.required")">
                 </bootstrapinput>
 
-                <div class="control-group success" ng-class="{hide: !messageboxshow,error: messageboxerror}">
+                <div class="control-group" ng-class="{hide: !messageboxshow,error: messageboxerror,success: !messageboxerror}">
                     <div class="controls">
                         <span class="help-inline" >{{messageboxmessage}}</span>
                     </div>

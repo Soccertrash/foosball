@@ -178,6 +178,9 @@ function PlayerController($scope, WebSocket) {
                 $scope.amountPlayers = protocolContainer.size;
                 $scope.requestPage();
                 break;
+            case 'TRIGGER_RELOAD':
+                $scope.updatePagination();
+                break;
         }
         $scope.$digest();
     };

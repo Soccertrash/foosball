@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controllers.message.DataContainer;
+import controllers.message.SimpleResponse;
+import controllers.message.TriggerReload;
 
 import play.i18n.Messages;
 import play.libs.F.Callback;
@@ -52,12 +54,16 @@ public class PlayerActor extends UntypedActor {
 				context.webSocketIn.onMessage(new WebSocketInCallback(context));
 				webSockets.put(context.webSocketIn, context);
 			}
+		}else if(message instanceof TriggerReload){
+			for (WebSocketContext ctx : this.webSockets.values()) {
+				ctx.webSocketOut.write(Json.stringify(Json.toJson(message)));
+			}
 		}
 		LOGGER.debug("Amount of WebSockets {}", webSockets.size());
 
 	}
 
-	private static class WebSocketInCallback implements Callback<String> {
+	private  class WebSocketInCallback implements Callback<String> {
 
 		private WebSocketContext context;
 
@@ -75,6 +81,11 @@ public class PlayerActor extends UntypedActor {
 				DataContainer dataContainer = Json.fromJson(json,
 						DataContainer.class);
 				DataContainer response = dataContainer.execute();
+				if(response instanceof SimpleResponse){
+					if(((SimpleResponse)response).isSuccessful()){
+						getContext().self().tell(new TriggerReload());
+					}
+				}
 				context.webSocketOut.write(Json.stringify(Json.toJson(response)));
 
 			} catch (Exception e) {

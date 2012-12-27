@@ -18,6 +18,7 @@ import controllers.player.message.PagedPlayer;
 		@Type(name =  DataContainer.AMOUNT_PLAYER, value = AmountPlayers.class) ,
 		@Type(name =  DataContainer.PAGED_PLAYER, value = PagedPlayer.class) ,
 		@Type(name =  DataContainer.ENTITY_LIST, value = EntityListContainer.class) ,
+		@Type(name =  DataContainer.TRIGGER_RELOAD, value = TriggerReload.class) ,
 		@Type(name =  DataContainer.DELETE_PLAYER, value = DeletePlayer.class) 
 		})
 public abstract class DataContainer {
@@ -28,6 +29,7 @@ public abstract class DataContainer {
 	public final static String PAGED_PLAYER = "PAGED_PLAYER";
 	public final static String ENTITY_LIST = "ENTITY_LIST";
 	public final static String DELETE_PLAYER = "DELETE_PLAYER";
+	public final static String TRIGGER_RELOAD = "TRIGGER_RELOAD";
 
 	public abstract DataContainer execute();
 }
