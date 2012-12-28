@@ -14,6 +14,7 @@ public class JavascriptRouter extends Controller {
 		return ok(Routes.javascriptRouter(
 				"jsRoutes",
 				// Routes
-				controllers.player.routes.javascript.PlayerController.websocket()			));
+				controllers.player.routes.javascript.PlayerController.websocket(),
+				controllers.tournament.creation.routes.javascript.TournamentCreationController.websocket()));
 	}
 }

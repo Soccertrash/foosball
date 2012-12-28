@@ -2,7 +2,55 @@
 
 <div class="row" ng-controller="TournamentController">
     <div class="offset3 span6">
+        <form class="form-horizontal" name="tournamentForm" ng-model="tournament" ng-submit="createTournament()" novalidate>
+            <fieldset>
 
+
+                <bootstrapinput
+                        model="tournament.name"
+                        key="tournamentName"
+                        localized="@Messages("tournament.name")"
+                formpath="tournamentForm.tournamentName"
+                required
+                errormessage="@Messages("constraint.required")">
+                </bootstrapinput>
+                <div class="control-group" ng-class="{error: tournamentForm.selectedPlayers.$invalid}">
+                    <label class="control-label" for="@Messages("selectedPlayers")">@Messages("selectedPlayers")</label>
+
+                    <div class="controls">
+
+                        <select multiple ng-model="tournament.selectedPlayers"
+                                ng-options="(player.lastName + ', ' +player.firstName)  for player in allPlayers"
+                                ng-change="changeSelection()"
+                                name="selectedPlayers"
+                                required>
+                        </select>
+
+                        <span class="help-inline" ng-show="tournamentForm.selectedPlayers.$error.tooless">@Messages("tournamentcreation.tooless")</span>
+                        <span class="help-inline" ng-show="tournamentForm.selectedPlayers.$error.required">@Messages("constraint.required")</span>
+                        <span class="help-inline" ng-show="tournamentForm.selectedPlayers.$error.noteven">@Messages("tournamentcreation.noteven")</span>
+                    </div>
+                </div>
+
+
+                <div class="control-group"
+                     ng-class="{hide: !messageboxshow,error: messageboxerror,success: !messageboxerror}">
+                    <div class="controls">
+                        <span class="help-inline">{{messageboxmessage}}</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button id="sButton" ng-disabled="tournamentForm.$invalid"
+                                class="btn btn-primary center" data-loading-text="Loading...">@Messages("button.ok")
+                        </button>
+                        <button type="reset" class="btn" ng-click="resetForm()">@Messages("button.cancel")</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
     </div>
     <!-- offset3 span6 -->
 </div><!-- row -->

@@ -27,6 +27,11 @@ player.delete=Der Spieler {0} wurde erfolgreich gelöscht
 player.not.save=Konnte den Spieler nicht abspeichern.
 player.delete.question=Möchsten Sie den Spieler mit folgender ID wirklich löschen?
 
+# Tournament Creation
+tournamentcreation.tooless=Es müssen mindestens 4 Spieler ausgewählt werden
+tournamentcreation.noteven=Es muss ein gerade Anzahl an Spielern ausgewählt werden
+tournamentcreation.tournament.creation.successful=Turnier erfolgreich angelegt
+
 ### Contraints
 constraint.required=*
 constraint.min=Minimum {0}

@@ -10,6 +10,8 @@ import controllers.player.message.AmountPlayers;
 import controllers.player.message.CreatePlayer;
 import controllers.player.message.DeletePlayer;
 import controllers.player.message.PagedPlayer;
+import controllers.tournament.creation.message.AllPlayer;
+import controllers.tournament.creation.message.CreateTournament;
 
 @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "method")
 @JsonSubTypes({
@@ -19,6 +21,8 @@ import controllers.player.message.PagedPlayer;
 		@Type(name =  DataContainer.PAGED_PLAYER, value = PagedPlayer.class) ,
 		@Type(name =  DataContainer.ENTITY_LIST, value = EntityListContainer.class) ,
 		@Type(name =  DataContainer.TRIGGER_RELOAD, value = TriggerReload.class) ,
+		@Type(name =  DataContainer.ALL_PLAYER, value = AllPlayer.class) ,
+		@Type(name =  DataContainer.CREATE_TOURNAMENT, value = CreateTournament.class) ,
 		@Type(name =  DataContainer.DELETE_PLAYER, value = DeletePlayer.class) 
 		})
 public abstract class DataContainer {
@@ -30,6 +34,8 @@ public abstract class DataContainer {
 	public final static String ENTITY_LIST = "ENTITY_LIST";
 	public final static String DELETE_PLAYER = "DELETE_PLAYER";
 	public final static String TRIGGER_RELOAD = "TRIGGER_RELOAD";
+	public final static String CREATE_TOURNAMENT = "CREATE_TOURNAMENT";
+	public final static String ALL_PLAYER = "ALL_PLAYER";
 
 	public abstract DataContainer execute();
 }

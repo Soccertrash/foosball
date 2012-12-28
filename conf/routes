@@ -16,6 +16,7 @@ GET     /partials/tournametCreation.html		controllers.Application.tournametCreat
 
 # Player
 GET		/Player/websocket			controllers.player.PlayerController.websocket
+GET		/TournamentCreationController/websocket			controllers.tournament.creation.TournamentCreationController.websocket
 
 
 # Javascript routing

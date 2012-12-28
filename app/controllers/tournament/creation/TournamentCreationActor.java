@@ -1,30 +1,16 @@
-package controllers.player;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import model.Player;
+package controllers.tournament.creation;
 
 import org.codehaus.jackson.JsonNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import play.libs.Json;
 
 import controllers.WebSocketActor;
 import controllers.message.DataContainer;
 import controllers.message.SimpleResponse;
 import controllers.message.TriggerReload;
-
-import play.i18n.Messages;
-import play.libs.F.Callback;
-import play.libs.F.Callback0;
-import play.libs.Json;
-import play.mvc.Http.Context;
-import play.mvc.WebSocket.In;
-import play.mvc.WebSocket.Out;
-
 import akka.actor.UntypedActor;
 
-public class PlayerActor extends WebSocketActor {
+public class TournamentCreationActor extends WebSocketActor {
 
 	@Override
 	public String handleMessage(String message) {
@@ -42,4 +28,7 @@ public class PlayerActor extends WebSocketActor {
 		}
 		return null;
 	}
+
+
+
 }
