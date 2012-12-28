@@ -31,6 +31,8 @@ player.delete.question=Möchsten Sie den Spieler mit folgender ID wirklich lösc
 tournamentcreation.tooless=Es müssen mindestens 4 Spieler ausgewählt werden
 tournamentcreation.noteven=Es muss ein gerade Anzahl an Spielern ausgewählt werden
 tournamentcreation.tournament.creation.successful=Turnier erfolgreich angelegt
+tournament.name=Turniername
+selectedPlayers=Teilnehmer
 
 ### Contraints
 constraint.required=*
