@@ -3,12 +3,10 @@ package controllers.tournament.creation;
 import org.codehaus.jackson.JsonNode;
 
 import play.libs.Json;
-
 import controllers.WebSocketActor;
 import controllers.message.DataContainer;
 import controllers.message.SimpleResponse;
 import controllers.message.TriggerReload;
-import akka.actor.UntypedActor;
 
 public class TournamentCreationActor extends WebSocketActor {
 
@@ -27,6 +25,12 @@ public class TournamentCreationActor extends WebSocketActor {
 			return Json.stringify(Json.toJson(response));
 		}
 		return null;
+	}
+
+	@Override
+	public void handleTriggerReload(TriggerReload message) {
+		// Don't reload the page
+		
 	}
 
 

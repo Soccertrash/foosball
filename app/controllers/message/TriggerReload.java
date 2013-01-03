@@ -2,6 +2,9 @@ package controllers.message;
 
 import java.io.Serializable;
 
+/**
+ * The Class TriggerReload is used for getting the current view reloaded.
+ */
 public class TriggerReload extends DataContainer implements Serializable{
 
 	/**

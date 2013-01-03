@@ -9,6 +9,9 @@ import model.Player;
 import controllers.message.DataContainer;
 import controllers.message.SimpleResponse;
 
+/**
+ * The Class CreatePlayer is used for creating a new player
+ */
 public class CreatePlayer extends DataContainer {
 	
 	private final static Logger LOGGER = LoggerFactory.getLogger(CreatePlayer.class);

@@ -13,6 +13,9 @@ import controllers.player.message.PagedPlayer;
 import controllers.tournament.creation.message.AllPlayer;
 import controllers.tournament.creation.message.CreateTournament;
 
+/**
+ * The Class DataContainer is the base class for the JSON responses
+ */
 @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "method")
 @JsonSubTypes({
 		@Type(name = DataContainer.CREATE_PLAYER, value = CreatePlayer.class),

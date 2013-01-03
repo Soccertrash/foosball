@@ -12,6 +12,9 @@ import controllers.message.DataContainer;
 import controllers.message.EntityListContainer;
 import controllers.message.SimpleResponse;
 
+/**
+ * PagedPlayer returns a subset of all players. The range is restricted with {@link #from} and {@link #maxRows}
+ */
 public class PagedPlayer extends DataContainer {
 	
 	

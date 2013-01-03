@@ -8,6 +8,9 @@ import model.Player;
 import controllers.message.DataContainer;
 import controllers.message.SimpleResponse;
 
+/**
+ * The Class AmountPlayers returns the amount of currently known players.
+ */
 public class AmountPlayers extends DataContainer {
 	
 	private final static Logger LOGGER = LoggerFactory.getLogger(AmountPlayers.class);
@@ -24,9 +27,15 @@ public class AmountPlayers extends DataContainer {
 			sr.setErrorMessage(Messages.get("technical.error"));
 			return sr;
 		}
+		LOGGER.debug("There are {} players available",getSize());
 		return this;
 	}
 
+	/**
+	 * Gets the amount of players
+	 *
+	 * @return the amount of players
+	 */
 	public int getSize() {
 		return size;
 	}

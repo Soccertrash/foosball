@@ -10,6 +10,9 @@ import play.i18n.Messages;
 import controllers.message.DataContainer;
 import controllers.message.SimpleResponse;
 
+/**
+ * DeletePlayer is used to delete a player
+ */
 public class DeletePlayer extends DataContainer {
 
 	private final static Logger LOGGER = LoggerFactory

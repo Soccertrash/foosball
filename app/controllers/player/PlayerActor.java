@@ -1,6 +1,7 @@
 package controllers.player;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import model.Player;
@@ -29,17 +30,26 @@ public class PlayerActor extends WebSocketActor {
 	@Override
 	public String handleMessage(String message) {
 		JsonNode json = Json.parse(message);
-		DataContainer dataContainer = Json.fromJson(json,
-				DataContainer.class);
+		DataContainer dataContainer = Json.fromJson(json, DataContainer.class);
 		DataContainer response = dataContainer.execute();
 		if (response instanceof SimpleResponse) {
 			if (((SimpleResponse) response).isSuccessful()) {
 				getContext().self().tell(new TriggerReload());
 			}
 		}
-		if(response != null){
+		if (response != null) {
 			return Json.stringify(Json.toJson(response));
 		}
 		return null;
+	}
+
+	@Override
+	public void handleTriggerReload(TriggerReload trigger) {
+		Iterator<WebSocketContext> iterator = getWebSockets();
+		while(iterator.hasNext()){
+			WebSocketContext ctx = iterator.next();
+			ctx.getWebSocketOut().write(Json.stringify(Json.toJson(trigger)));
+		}
+		
 	}
 }

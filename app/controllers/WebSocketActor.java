@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -8,14 +9,15 @@ import org.slf4j.LoggerFactory;
 
 import play.libs.F.Callback;
 import play.libs.F.Callback0;
-import play.libs.Json;
 import play.mvc.Http.Context;
 import play.mvc.WebSocket.In;
 import play.mvc.WebSocket.Out;
 import akka.actor.UntypedActor;
-import controllers.WebSocketActor.WebSocketContext;
 import controllers.message.TriggerReload;
 
+/**
+ * The Class WebSocketActor manages the WebSockets for a certain domain. 
+ */
 public abstract class WebSocketActor extends UntypedActor {
 	private final Map<In<String>, WebSocketContext> webSockets = new HashMap<>();
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
@@ -25,32 +27,32 @@ public abstract class WebSocketActor extends UntypedActor {
 		if (message instanceof WebSocketContext) {
 			WebSocketContext context = (WebSocketContext) message;
 
-			if (webSockets.containsKey(context.webSocketIn)) {
+			if (this.webSockets.containsKey(context.webSocketIn)) {
 				context.webSocketOut.close();
-				webSockets.remove(context.webSocketIn);
-				LOGGER.debug("Removed WS... ");
+				this.webSockets.remove(context.webSocketIn);
+				this.LOGGER.debug("Removed WS... ");
 			} else {
 				final In<String> webSocketIn = context.webSocketIn;
 				webSocketIn.onClose(new Callback0() {
 
 					@Override
 					public void invoke() throws Throwable {
-						WebSocketContext webSocketContext = webSockets
+						WebSocketContext webSocketContext = WebSocketActor.this.webSockets
 								.get(webSocketIn);
-						LOGGER.debug("Closing... {}", webSocketContext);
-						getContext().self().tell(webSocketContext);
+						WebSocketActor.this.LOGGER.debug("Closing... {}",
+								webSocketContext);
+						WebSocketActor.this.getContext().self()
+								.tell(webSocketContext);
 
 					}
 				});
 				context.webSocketIn.onMessage(new WebSocketInCallback(context));
-				webSockets.put(context.webSocketIn, context);
+				this.webSockets.put(context.webSocketIn, context);
 			}
 		} else if (message instanceof TriggerReload) {
-			for (WebSocketContext ctx : this.webSockets.values()) {
-				ctx.webSocketOut.write(Json.stringify(Json.toJson(message)));
-			}
+			this.handleTriggerReload((TriggerReload)message);
 		}
-		LOGGER.debug("Amount of WebSockets {}", webSockets.size());
+		this.LOGGER.debug("Amount of WebSockets {}", this.webSockets.size());
 
 	}
 
@@ -65,16 +67,17 @@ public abstract class WebSocketActor extends UntypedActor {
 
 		@Override
 		public void invoke(String message) throws Throwable {
-			Context.current.set(context.context);
+			Context.current.set(this.context.context);
 			try {
-				LOGGER.debug("Incoming {}", message);
-				String response = handleMessage(message);
+				WebSocketActor.this.LOGGER.debug("Incoming {}", message);
+				String response = WebSocketActor.this.handleMessage(message);
 				if (response != null) {
-					context.webSocketOut.write(response);
+					this.context.webSocketOut.write(response);
 				}
 
 			} catch (Exception e) {
-				LOGGER.error("Exception has been thrown", e);
+				WebSocketActor.this.LOGGER
+						.error("Exception has been thrown", e);
 			} finally {
 				Context.current.remove();
 			}
@@ -82,7 +85,28 @@ public abstract class WebSocketActor extends UntypedActor {
 
 	}
 
+	/**
+	 * Handle the incoming message
+	 * 
+	 * @param message
+	 *            the message that is received via web sockets
+	 * @return the string that is send back to the client or <code>null</code>
+	 */
 	public abstract String handleMessage(String message);
+
+	/**
+	 * Handle trigger reload message
+	 */
+	public abstract void handleTriggerReload(TriggerReload message);
+
+	/**
+	 * Gets the web sockets (iterator)
+	 * 
+	 * @return a {@link Iterator} of {@link WebSocketContext}s
+	 */
+	protected Iterator<WebSocketContext> getWebSockets() {
+		return this.webSockets.values().iterator();
+	}
 
 	public static class WebSocketContext {
 		private final Out<String> webSocketOut;
@@ -96,6 +120,11 @@ public abstract class WebSocketActor extends UntypedActor {
 			this.webSocketIn = webSocketIn;
 			this.context = context;
 		}
+
+		public Out<String> getWebSocketOut() {
+			return webSocketOut;
+		}
+		
 
 	}
 }
