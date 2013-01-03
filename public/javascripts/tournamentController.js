@@ -2,7 +2,7 @@ function TournamentController($scope,WebSocket) {
     $scope.messageboxshow = false;
     $scope.messageboxerror = false;
     $scope.messageboxmessage = '';
-
+    $scope.buttonLoading = false;
 
     $scope.allPlayers = [];
 
@@ -10,8 +10,9 @@ function TournamentController($scope,WebSocket) {
         var tournament = $scope.tournament;
         var json = {method:'CREATE_TOURNAMENT',tournamentName: tournament.name,selectedPlayers:tournament.selectedPlayers};
         var message = angular.toJson(json);
+        $('#sButton').button('loading');
+        $scope.buttonLoading = true;
         WebSocket.send(message);
-        $scope.resetForm();
     };
 
     $scope.changeSelection = function () {
@@ -30,6 +31,7 @@ function TournamentController($scope,WebSocket) {
         $scope.tournamentForm.selectedPlayers.$setValidity('noteven',true);
         $scope.tournament = null;
     }
+
     WebSocket.onmessage = function (event) {
         var protocolContainer = angular.fromJson(event.data);
         switch (protocolContainer.method) {
@@ -38,6 +40,23 @@ function TournamentController($scope,WebSocket) {
                 break;
             case 'TRIGGER_RELOAD':
                 $scope.fetchAllPlayers();
+                break;
+            case 'SIMPLE_RESPONSE':
+                if($scope.buttonLoading){
+                    $('#sButton').button('reset');
+                    $scope.buttonLoading = false;
+                }
+                if (protocolContainer.successful) {
+                    $scope.resetForm();
+                    $scope.messageboxshow = true;
+                    $scope.messageboxmessage = protocolContainer.successMessage;
+                    $scope.messageboxerror = false;
+                }else{
+                    $scope.messageboxshow = true;
+                    $scope.messageboxmessage = protocolContainer.errorMessage;
+                    $scope.messageboxerror = true;
+                }
+
                 break;
         }
         $scope.$digest();

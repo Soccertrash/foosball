@@ -1,11 +1,7 @@
 package controllers.tournament.creation.message;
 
-import java.util.List;
-
-import play.i18n.Messages;
-
 import model.Player;
-
+import play.i18n.Messages;
 import controllers.message.DataContainer;
 import controllers.message.SimpleResponse;
 

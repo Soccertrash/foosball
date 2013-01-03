@@ -1,8 +1,5 @@
 package controllers.player.message;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Player;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
