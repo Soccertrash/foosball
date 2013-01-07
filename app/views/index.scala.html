@@ -8,11 +8,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="@routes.JavascriptRouter.javascriptRoutes" type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
-    <script src="@routes.Assets.at("javascripts/app.js")"></script>
+    <script src="@routes.Assets.at("javascripts/app.js")" ></script>
     <script src="@routes.Assets.at("javascripts/playerController.js")"></script>
-    <script src="@routes.Assets.at("javascripts/tournamentController.js")"></script>
+    <script src="@routes.Assets.at("javascripts/tournamentController.js")" ></script>
     <link href="@routes.Assets.at("stylesheets/bootstrap/bootstrap.css")" rel="stylesheet"/>
     <link href="@routes.Assets.at("stylesheets/bootstrap/responsive.css")" rel="stylesheet"/>
+    <link href="@routes.Assets.at("stylesheets/fontawesome/font-awesome.css")" rel="stylesheet"/>
+    <link href="@routes.Assets.at("stylesheets/fontawesome/font-awesome-ie7.min.css")" rel="stylesheet"/>
+    <link href="@routes.Assets.at("stylesheets/site.css")" rel="stylesheet"/>
+
 
     <style>
         body {
@@ -20,7 +24,7 @@
         }
     </style>
 </head>
-<body >
+<body>
 <div ng-include="'navbar.html'"></div>
 <div class="container">
     <div ng-view></div>

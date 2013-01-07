@@ -37,6 +37,7 @@ tournamentManagerModule.
 tournamentManagerModule.factory('WebSocket', function () {
     return{
         connect:function (url) {
+            this.close();
             var WS = window['MozWebSocket'] ? MozWebSocket : WebSocket;
             this.webSock = new WS(url);
             var self = this;
@@ -45,17 +46,27 @@ tournamentManagerModule.factory('WebSocket', function () {
                     self.onmessage(event);
                 }
             }
-
             this.webSock.onopen = function () {
                 if (self.onopen) {
                     self.onopen();
                 }
             }
+            this.webSock.onclose = function(){
+                if(self.onclose){
+                    self.onclose();
+                }
+            }
+
 
 
         },
         send:function (message) {
             this.webSock.send(message);
+        },
+        close:function (){
+            if(this.webSock){
+                this.webSock.close();
+            }
         }
 
     }
