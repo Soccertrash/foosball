@@ -1,0 +1,13 @@
+
+<div class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavigationController">
+    <div class="navbar-inner">
+        <div class="container">
+
+                <ul class="nav">
+                    <li ng-class="{active: isActive('/home')}"><a ng-click="setRoute('home')" i18n="nav.home"></a></li>
+                    <li ng-class="{active: isActive('/player')}"><a ng-click="setRoute('player')"  i18n="nav.player"></a></li>
+                    <li ng-class="{active: isActive('/tournamentCreation')}"><a ng-click="setRoute('tournamentCreation')"  i18n="nav.tournament"></a></li>
+                </ul>
+        </div>
+    </div>
+</div>

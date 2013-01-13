@@ -1,0 +1,15 @@
+{
+    "title": "Sample application",
+    "nav":{
+        "home":"Home",
+        "about":"About",
+        "form":"Form"
+    },
+    "form":{
+        "surname": "Surname",
+        "firstname": "Given name",
+        "validation":{
+            "required" : "*"
+        }
+    }
+}

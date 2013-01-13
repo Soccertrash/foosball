@@ -1,0 +1,36 @@
+{
+    "title":"Foosball tournament manager",
+    "nav":{
+        "home":"Home",
+        "player":"Spieler",
+        "tournament":"Turnier"
+    },
+    "form":{
+        "surname":"Nachname",
+        "firstname":"Vorname",
+        "validation":{
+            "required":"*"
+        }
+    },
+    "player":{
+        "lastname":"Nachname",
+        "firstname":"Vorname",
+        "acronym":"Kürzel",
+        "deletequestion":"Möchten Sie den Spieler mit folgender ID löschen?"
+    },
+    "tournament":{
+        "name":"Turniername",
+        "selectedplayers":"Spieler auswählen",
+        "notevenamount":"Bitte ein gerade Anzahl an Spielern auswählen",
+        "toolessplayers":"Bitte mindestens 4 Spieler auswählen"
+    },
+    "form":{
+        "ok":"O.K.",
+        "cancel":"Abbrechen",
+        "delete":"Löschen"
+    },
+    "validation":{
+        "required": "*"
+    },
+    "confirmation":"Bestätigung"
+}
